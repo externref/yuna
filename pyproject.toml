@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "yuna"
+version = "0.1.0"
+description = ""
+authors = ["Deep"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+asyncpg = "^0.29.0"
+attrs = "^23.2.0"
+disnake = "^2.9.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
