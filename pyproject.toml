@@ -2,15 +2,22 @@
 name = "yuna"
 version = "0.1.0"
 description = ""
-authors = ["Deep"]
+authors = ["deep"]
+license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
+disnake = "^2.9.1"
+disnake-jishaku = "^2.6.5"
 asyncpg = "^0.29.0"
 attrs = "^23.2.0"
-disnake = "^2.9.1"
+python-dotenv = "^1.0.1"
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.15"
+isort = "^5.13.2"
+black = "^24.1.1"
 
 [build-system]
 requires = ["poetry-core"]
