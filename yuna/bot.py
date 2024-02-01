@@ -12,6 +12,9 @@ class Yuna(commands.Bot):
         self.load_extension("jishaku")
 
     async def setup(self) -> None:
+        for file in os.listdir("yuna/cogs"):
+            if (not file.startswith("__")) and file.endswith(".py"):
+                self.load_extension(f"yuna.cogs.{}")
         pool = asyncpg.create_pool(os.environ["PGSQL_URL"])
         with open("setup_pg.sql", "r") as file:
             await pool.execute(file.read())

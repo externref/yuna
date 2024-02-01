@@ -4,7 +4,7 @@ dotenv.load_dotenv()
 
 import asyncio
 
-from src.bot import Yuna
+from yuna.bot import Yuna
 
 
 async def main():
