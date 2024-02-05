@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS confession_bans (
     guild_id BIGINT ,
     reason VARCHAR DEFAULT 'no reason provided'
 );
+
+CREATE TABLE IF NOT EXISTS member_logs (
+    action VARCHAR ,
+    guild_id BIGINT, 
+    channel_id BIGINT,
+    message VARCHAR,
+    image_url VARCHAR DEFAULT NULL
+);

@@ -131,12 +131,16 @@ class Confessions(YunaCog):
         num_confessions = await self.bot.pool.fetchval(
             "SELECT COUNT(*) FROM confession_messages WHERE guild_id=$1", inter.guild_id
         )
-        embed = embeds.BaseEmbed(
-            inter,
-            color=disnake.Color.purple(),
-            description=message,
-            footer=f"#{num_confessions+1}",
-            timestamp=datetime.datetime.now(),
+        embed = (
+            embeds.BaseEmbed(
+                inter,
+                color=disnake.Color.purple(),
+                description=message,
+                title=f"#{num_confessions+1}",
+                timestamp=datetime.datetime.now(),
+            )
+            .remove_footer()
+            .set_thumbnail((inter.guild.icon or inter.author.display_avatar).url)
         )
 
         try:
