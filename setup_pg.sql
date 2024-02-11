@@ -24,3 +24,19 @@ CREATE TABLE IF NOT EXISTS member_logs (
     message VARCHAR,
     image_url VARCHAR DEFAULT NULL
 );
+
+CREATE TABLE IF NOT EXISTS afk_data (
+    user_id BIGINT,
+    guild_id BIGINT,
+    is_global BOOLEAN,
+    message VARCHAR,
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS afk_mentions (
+    user_id BIGINT,
+    guild_id BIGINT,
+    mention_msg VARCHAR,
+    mention_url VARCHAR,
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

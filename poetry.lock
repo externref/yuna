@@ -111,6 +111,17 @@ files = [
 frozenlist = ">=1.1.0"
 
 [[package]]
+name = "aoi"
+version = "0.1.2"
+description = "SQLITE3 CLI wrapper build on python."
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "aoi-0.1.2-py3-none-any.whl", hash = "sha256:6daf019d3fd027b5dc0209dea35f6e6ccda045813ff384c0c5c6cf2ff9c85b32"},
+    {file = "aoi-0.1.2.tar.gz", hash = "sha256:356b0b37a8377105f929fa053f3a25878ca61bbeb928c047c4f9644217a62f1a"},
+]
+
+[[package]]
 name = "astunparse"
 version = "1.6.3"
 description = "An AST unparser for Python"
@@ -789,4 +800,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "433478e1f45a3a583e70c47d234038b48faec7e7831866295beb262ca7201146"
+content-hash = "50da185c6866db5102dc59d9a1afb41eeb14e68fa58fc9e057d495abb5f4562a"

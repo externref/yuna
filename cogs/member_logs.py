@@ -22,7 +22,6 @@ class EntryData(typing.TypedDict):
 
 
 def parser(message: str, member: disnake.Member) -> str:
-
     return message.format(
         **{
             "member_name": str(member),
@@ -135,9 +134,11 @@ class MemberLogging(YunaCog):
     async def left_member(self, member: disnake.Member) -> None:
         await self.send_message("leave", member)
 
+    @commands.has_permissions(manage_guild=True)
     @commands.slash_command(name="welcome")
     async def welcome(self, _: disnake.CmdInter) -> None: ...
 
+    @commands.has_permissions(manage_guild=True)
     @commands.slash_command(name="goodbye")
     async def goodbye(self, _: disnake.CmdInter) -> None: ...
 
@@ -163,17 +164,18 @@ class MemberLogging(YunaCog):
         await inter.response.defer()
         await self.update_message(inter.guild_id, "join", message)
         await inter.edit_original_response(
-            embed=embeds.success_embed("Message has been updated")
+            embed=embeds.success_embed(inter, "Message has been updated")
         )
 
+    @commands.has_permissions(manage_guild=True)
     @goodbye.sub_command(
-        name="goodbye", description="Edit the message to send in the logs"
+        name="message", description="Edit the message to send in the logs"
     )
     async def goodbye_message(self, inter: disnake.CmdInter, message: str) -> None:
         await inter.response.defer()
         await self.update_message(inter.guild_id, "leave", message)
         await inter.edit_original_response(
-            embed=embeds.success_embed("Message has been updated")
+            embed=embeds.success_embed(inter, "Message has been updated")
         )
 
 

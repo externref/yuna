@@ -9,6 +9,7 @@ from yuna.logger import main_logger
 
 class Yuna(commands.Bot):
     pool: asyncpg.Pool
+    logger = main_logger
 
     def __init__(self) -> None:
         super().__init__("y!", intents=disnake.Intents.all())
