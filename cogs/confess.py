@@ -20,7 +20,8 @@ class ConfessionData(typing.TypedDict):
 
 class Confessions(YunaCog):
     @commands.slash_command(name="confession")
-    async def _confess(self, _: disnake.CmdInter) -> None: ...
+    async def _confess(self, _: disnake.CmdInter) -> None:
+        """Write your confession message here."""
 
     async def guild_channel(
         self, guild_id: int, *, set_id: int | None = None
@@ -93,6 +94,12 @@ class Confessions(YunaCog):
     async def ban_member(
         self, inter: disnake.CmdInter, c_id: int, reason: str | None = None
     ) -> None:
+        """Bans the member who is spreading hatred
+
+        Parameters
+        ----------
+        ban: Banned the members.
+        """
         await inter.response.defer(ephemeral=True)
         data: ConfessionData | None = await self.bot.pool.fetchrow(
             "SELECT * FROM confession_messages WHERE guild_id=$1 AND id=$2",
@@ -118,6 +125,7 @@ class Confessions(YunaCog):
 
     @_confess.sub_command("create", "Create a confession")
     async def create_confession(self, inter: disnake.CmdInter, message: str) -> None:
+        """set your confession message."""
         await inter.response.defer(ephemeral=True)
         if (channel := await self.guild_channel(inter.guild_id)) is None:
             await inter.edit_original_response(

@@ -147,6 +147,12 @@ class MemberLogging(YunaCog):
     async def welcome_channel(
         self, inter: disnake.CmdInter, channel: disnake.TextChannel
     ) -> None:
+        """Set your welcome channel where you want to see welcome message.
+
+        Parameters
+        ----------
+        channel: The channel to set.
+        """
         await self.set_channel("join", inter, channel)
 
     @commands.has_permissions(manage_guild=True)
@@ -154,6 +160,12 @@ class MemberLogging(YunaCog):
     async def goodbye_channel(
         self, inter: disnake.CmdInter, channel: disnake.TextChannel
     ) -> None:
+        """Set your goodbye channel where you want to see goodbye message.
+
+        Parameters
+        ----------
+        channel: The channel to set.
+        """
         await self.set_channel("leave", inter, channel)
 
     @commands.has_permissions(manage_guild=True)
@@ -161,6 +173,12 @@ class MemberLogging(YunaCog):
         name="message", description="Edit the message to send in the logs"
     )
     async def welcome_message(self, inter: disnake.CmdInter, message: str) -> None:
+        """Set your welcome message.
+
+        Parameters
+        ----------
+        message: The welcome message to set.
+        """
         await inter.response.defer()
         await self.update_message(inter.guild_id, "join", message)
         await inter.edit_original_response(
@@ -172,6 +190,12 @@ class MemberLogging(YunaCog):
         name="message", description="Edit the message to send in the logs"
     )
     async def goodbye_message(self, inter: disnake.CmdInter, message: str) -> None:
+        """Set your goodbye message.
+
+        Parameters
+        ----------
+        message: The goodbye message to set.
+        """
         await inter.response.defer()
         await self.update_message(inter.guild_id, "leave", message)
         await inter.edit_original_response(
