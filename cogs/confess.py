@@ -73,6 +73,12 @@ class Confessions(YunaCog):
     async def set_channel(
         self, inter: disnake.CmdInter, channel: disnake.TextChannel
     ) -> None:
+        """Set the channel where message will be sent
+
+        Parameters
+        ----------
+        channel: The channel to set.
+        """
         await self.guild_channel(inter.guild_id, set_id=channel.id)
         await inter.send(
             embed=embeds.success_embed(

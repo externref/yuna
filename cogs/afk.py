@@ -62,7 +62,6 @@ class AFK(YunaCog):
                 message.author.id,
                 message.guild.id,
             )
-        print(mentions_d)
         for mention in sorted(mentions_d, key=lambda x: x["created_on"])[:10]:
             mentions += f"{disnake.utils.format_dt(mention['created_on'], 'R')} [{mention['mention_msg']}]({mention['mention_url']})\n"
         await self.bot.pool.execute(
@@ -71,9 +70,16 @@ class AFK(YunaCog):
         await self.bot.pool.execute(
             "DELETE FROM afk_mentions WHERE user_id=$1", message.author.id
         )
+        if message.guild.me.guild_permissions.manage_nicknames:
+            try:
+                await message.author.edit(
+                    nick=message.author.display_name.replace("[AFK] ", "")
+                )
+            except Exception:
+                ...
         await message.reply(
             embed=disnake.Embed(
-                description=f"Your AFK has been removed\n\n{emojis.Emojis.MENTION} **Recent Mentions**\{mentions or None}n"
+                description=f"Your AFK has been removed\n**Reason**: {data['message']}\n\n{emojis.Emojis.MENTION} **Recent Mentions**\n{mentions or None}"
             )
         )
 
@@ -90,6 +96,12 @@ class AFK(YunaCog):
             True,
         )
         if data:
+            await message.reply(
+                embed=disnake.Embed(
+                    color=disnake.Color.purple(),
+                    description=f"{user.mention} is AFK.\n**Reason**: {data['message']}",
+                ).set_footer(icon_url=user.display_avatar.url, text=user.name)
+            )
             await self.bot.pool.execute(
                 "INSERT INTO afk_mentions VALUES ($1, $2, $3, $4);",
                 user.id,
@@ -105,8 +117,13 @@ class AFK(YunaCog):
     async def set_afk(self, inter: disnake.CmdInter, message: str = "AFK") -> None:
         await inter.response.defer()
         await self.add_afk_to_user(inter.author, message, False)
+        if inter.guild.me.guild_permissions.manage_nicknames:
+            try:
+                await inter.author.edit(nick=f"[AFK] {inter.user.display_name}")
+            except Exception:
+                ...
         await inter.edit_original_response(
-            content="You're now AFK, beware of the real world"
+            content=f"{inter.author.mention} You're now AFK, beware of the real world"
         )
 
 
