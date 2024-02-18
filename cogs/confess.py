@@ -19,6 +19,8 @@ class ConfessionData(typing.TypedDict):
 
 
 class Confessions(YunaCog):
+    is_group = True
+    qualified_name = "confession"
     @commands.slash_command(name="confession")
     async def _confess(self, _: disnake.CmdInter) -> None:
         """Write your confession message here."""

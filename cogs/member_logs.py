@@ -38,6 +38,7 @@ def parser(message: str, member: disnake.Member) -> str:
 
 
 class MemberLogging(YunaCog):
+    qualified_name = "member logging"
     async def log_channel(
         self,
         action: typing.Literal["join", "leave"],

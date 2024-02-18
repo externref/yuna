@@ -4,20 +4,23 @@ import asyncpg
 import disnake
 from disnake.ext import commands
 
+from yuna.help import _help
 from yuna.logger import main_logger
 
 
 class Yuna(commands.Bot):
     pool: asyncpg.Pool
     logger = main_logger
+    version = "0.0.1a"
 
     def __init__(self) -> None:
-        super().__init__("y!", intents=disnake.Intents.all())
+        super().__init__("y!", intents=disnake.Intents.all(), sync_commands=True)
         self.owner_ids.add(1134016724132446208)
         self.load_extension("jishaku")
+        self.get_cog("Jishaku").is_group=False
 
     async def on_ready(self) -> None:
-        main_logger.info(f"Ready with latency of: {self.latency*1000:.2f}ms")
+        main_logger.info(f"{self.user} | Ready with latency of: {self.latency*1000:.2f}ms")
 
     async def setup(self) -> None:
         main_logger.debug("Loading cogs ...")
@@ -36,4 +39,5 @@ class Yuna(commands.Bot):
 
     async def start(self) -> None:  # type: ignore
         await self.setup()
-        await super().start(os.environ["TOKEN"])
+        self.add_slash_command(_help)
+        await super().start("MTEzNzMzMTM0OTA5MTUyNDY1OA.GBStxN.K5OMsLB1dPJQGQv6a1xjgJmO9M5n0uMRFrQq3Q")

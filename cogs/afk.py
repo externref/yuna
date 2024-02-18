@@ -27,6 +27,9 @@ class AFKMessageData(typing.TypedDict):
 
 
 class AFK(YunaCog):
+    qualified_name = "afk"
+    is_group = True
+
     async def add_afk_to_user(
         self, user: disnake.Member, message, _global: bool = False
     ) -> None:
