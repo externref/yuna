@@ -40,4 +40,4 @@ class Yuna(commands.Bot):
     async def start(self) -> None:  # type: ignore
         await self.setup()
         self.add_slash_command(_help)
-        await super().start("MTEzNzMzMTM0OTA5MTUyNDY1OA.GBStxN.K5OMsLB1dPJQGQv6a1xjgJmO9M5n0uMRFrQq3Q")
+        await super().start(os.getenv("TOKEN"))
